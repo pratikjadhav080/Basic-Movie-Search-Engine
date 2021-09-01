@@ -37,10 +37,17 @@
             margin-top: 20px;
             color: white;
         }
+
         input:focus,
         textarea:focus,
         select:focus {
             outline: none;
+        }
+
+        #error_div {
+            display: none;
+            width:30%;
+            margin:auto;
         }
     </style>
 </head>
@@ -52,15 +59,23 @@
     <button id="btn" onclick="makeReq()">Submit</button>
 
     <div id="poster">
+        <div id="content">
             <img id="images"
-            src="https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg">
-        <div>
-            <h1>Title : <span id="title">Interstellar</span></h1>
-            <h1>Director : <span id="Director">Christopher Nolan</span></h1>
-            <h1>Actors : <span id="Actors">Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page</span></h1>
-            <h1>Released Date : <span id="Released">16 Jul 2010</span></h1>
-            <h1>IMDB Rating : <span id="IMDB">8.8</span></h1>
+                src="https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg">
+            <div>
+                <h1>Title : <span id="title">Interstellar</span></h1>
+                <h1>Director : <span id="Director">Christopher Nolan</span></h1>
+                <h1>Actors : <span id="Actors">Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page</span></h1>
+                <h1>Released Date : <span id="Released">16 Jul 2010</span></h1>
+                <h1>IMDB Rating : <span id="IMDB">8.8</span></h1>
+            </div>
         </div>
+
+        <div id="error_div">
+            <img src="https://i.gifer.com/5bw.gif" alt="error" style="width:100%">
+            <h1>Sorry !, there is no movie with this name</h1>
+        </div>
+
     </div>
 
 
@@ -110,31 +125,51 @@
 
         //Interstellar
         async function makeReq() {
-            var Movie_name = document.getElementById("movie").value
 
-            let response = await fetch(`http://www.omdbapi.com/?t=${Movie_name}&apikey=558d822f`)
+            try {
+                var Movie_name = document.getElementById("movie").value
 
-            let data = await response.json();
+                let response = await fetch(`http://www.omdbapi.com/?t=${Movie_name}&apikey=558d822f`)
 
-            console.log("data:", data)
+                let data = await response.json();
 
-            var image = document.getElementById("images")
-            image.src = data.Poster
+                console.log("data:", data)
 
-            var title = document.getElementById("title")
-            title.textContent = data.Title
 
-            var Director = document.getElementById("Director")
-            Director.textContent = data.Director
+                if (data.Error) {
+                    var content = document.getElementById("content")
+                    content.style.display = "none"
+                    var error = document.getElementById("error_div")
+                    error.style.display = "block"
+                }else{
+                    var content = document.getElementById("content")
+                    content.style.display = "block"
+                    var error = document.getElementById("error_div")
+                    error.style.display = "none"
+                }
 
-            var Actors = document.getElementById("Actors")
-            Actors.textContent = data.Actors
+                var image = document.getElementById("images")
+                image.src = data.Poster
 
-            var Released = document.getElementById("Released")
-            Released.textContent = data.Released
+                var title = document.getElementById("title")
+                title.textContent = data.Title
 
-            var IMDB = document.getElementById("IMDB")
-            IMDB.textContent = data.imdbRating
+                var Director = document.getElementById("Director")
+                Director.textContent = data.Director
+
+                var Actors = document.getElementById("Actors")
+                Actors.textContent = data.Actors
+
+                var Released = document.getElementById("Released")
+                Released.textContent = data.Released
+
+                var IMDB = document.getElementById("IMDB")
+                IMDB.textContent = data.imdbRating
+            }
+            catch {
+                console.log("no movie with this name")
+            }
+
 
 
         }
