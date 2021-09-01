@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(126, 30, 30);
+            text-align: center;
+        }
+        input{
+            width:20%;
+            height:25px;
+            margin-top: 10px;
+            margin-right:10px;
+            border-radius: 5px;
+            border:none;
+            padding:5px 10px;
+            
+        }
+        button{
+            background-color:black;
+            color:white;
+            border:none;
+            border-radius: 5px;
+            padding:10px 25px;
+            font-size: 15px;
+        }
+        #poster{
+            margin:auto;
+            margin-top:20px;
+            color:white;
+        }
+
+        input:focus, textarea:focus, select:focus{
+        outline: none;
+    }
+
+
+    </style>
+</head>
+<body>
+
+
+    <input id='movie' type="text" placeholder="Enter movie of your choice">
+    <button id="btn" onclick="makeReq()">Submit</button>
+
+    <div id="poster">
+        <img id="images" src="https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg">
+        <div>
+            <h1>Title : <span id="title">Interstellar</span></h1>
+            <h1>Director : <span id="Director">Christopher Nolan</span></h1>
+            <h1>Actors : <span id="Actors">Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page</span></h1>
+            <h1>Released Date : <span id="Released">16 Jul 2010</span></h1>
+            <h1>IMDB Rating : <span id="IMDB">8.8</span></h1>
+        </div>
+   </div>
+
+
+    <script>
+
+
+// {
+//     "Title": "Inception",
+//     "Year": "2010",
+//     "Rated": "PG-13",
+//     "Released": "16 Jul 2010",
+//     "Runtime": "148 min",
+//     "Genre": "Action, Adventure, Sci-Fi",
+//     "Director": "Christopher Nolan",
+//     "Writer": "Christopher Nolan",
+//     "Actors": "Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page",
+//     "Plot": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+//     "Language": "English, Japanese, French",
+//     "Country": "United States, United Kingdom",
+//     "Awards": "Won 4 Oscars. 157 wins & 220 nominations total",
+//     "Poster": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+//     "Ratings": [
+//         {
+//             "Source": "Internet Movie Database",
+//             "Value": "8.8/10"
+//         },
+//         {
+//             "Source": "Rotten Tomatoes",
+//             "Value": "87%"
+//         },
+//         {
+//             "Source": "Metacritic",
+//             "Value": "74/100"
+//         }
+//     ],
+//     "Metascore": "74",
+//     "imdbRating": "8.8",
+//     "imdbVotes": "2,155,810",
+//     "imdbID": "tt1375666",
+//     "Type": "movie",
+//     "DVD": "20 Jun 2013",
+//     "BoxOffice": "$292,576,195",
+//     "Production": "Syncopy, Warner Bros.",
+//     "Website": "N/A",
+//     "Response": "True"
+// }
+
+//Interstellar
+        async function makeReq(){
+            var Movie_name = document.getElementById("movie").value
+
+            let response = await fetch(`http://www.omdbapi.com/?t=${Movie_name}&apikey=558d822f`)
+
+            let data = await response.json();
+
+            console.log("data:",data)
+
+            var image = document.getElementById("images")
+            image.src = data.Poster
+
+            var title = document.getElementById("title")
+            title.textContent=data.Title
+
+            var Director = document.getElementById("Director")
+            Director.textContent=data.Director
+
+            var Actors = document.getElementById("Actors")
+            Actors.textContent=data.Actors
+
+            var Released = document.getElementById("Released")
+            Released.textContent=data.Released
+
+            var IMDB = document.getElementById("IMDB")
+            IMDB.textContent=data.imdbRating
+
+
+        }
+
+    </script>
+</body>
+</html>

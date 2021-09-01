@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <input id='city' type="text">
+    <button id="city" onclick="cityFetch()">Submit</button>
+    <button id="city1" onclick="makeReq()">Submit</button>
+
+
+    <script>
+
+
+        fetch('https://fakestoreapi.com/products')
+            .then(function (response) {
+                return response.json()
+            })
+            .then(function (response) {
+                console.log("data:", response)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+
+
+        async function makeRequest() {
+            let response = await fetch("https://fakestoreapi.com/products")
+
+            let data = await response.json();
+
+            console.log("data:", data)
+        }
+
+        makeRequest();
+
+
+        function cityFetch() {
+
+            var city = document.getElementById("city").value
+
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=db39389b71ac1cf10de437e9fbc40044`)
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function (response) {
+                    console.log("data:", response)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+        }
+
+    
+        
+
+        async function makeReq() {
+            
+            var city1 = document.getElementById("city1").value
+
+            let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city1}&appid=db39389b71ac1cf10de437e9fbc40044`)
+
+            let data = await response.json();
+
+            console.log("datausingInput:", data)
+        }
+
+        // makeReq();
+
+    </script>
+</body>
+
+</html>
