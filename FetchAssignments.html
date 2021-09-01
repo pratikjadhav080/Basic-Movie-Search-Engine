@@ -149,7 +149,13 @@
                 }
 
                 var image = document.getElementById("images")
-                image.src = data.Poster
+
+                if(data.Poster!="N/A"){
+                    image.src = data.Poster
+                }else{
+                    image.src = "https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg"
+                }
+                
 
                 var title = document.getElementById("title")
                 title.textContent = data.Title
