@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <input id='city' type="text">
+    <button id="city1" onclick="makeReq()">Submit</button>
+
+
+    <script>
+    
+        
+
+        async function makeReq() {
+            
+            var capital = document.getElementById("city").value
+
+            let response = await fetch(`https://restcountries.eu/rest/v2/all`)
+
+            let data = await response.json();
+
+            for(let {name:pratik, capital}  of data){
+                // console.log("country:",country.name,country.capital,country.population,country.languages)
+
+                // [name, capital] = [country.name,country.capital];
+
+                // const {name:pratik, capital} = country;
+
+                console.log("country:",pratik,capital)
+            }
+        }
+
+        // makeReq();
+
+    </script>
+</body>
+
+</html>

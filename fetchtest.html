@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <input id='city' type="text">
+    <button id="city1" onclick="makeReq()">Submit</button>
+
+
+    <script>
+    
+        
+
+        async function makeReq() {
+            
+            var movie = document.getElementById("city").value
+
+            let response = await fetch(`http://www.omdbapi.com/?y=${movie}&apikey=558d822f`)
+
+            let data = await response.json();
+
+            console.log("datausingInput:", data)
+        }
+
+        // makeReq();
+
+    </script>
+</body>
+
+</html>

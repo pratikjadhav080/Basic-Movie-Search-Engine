@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <input id='youtube' type="text">
+    <button id="btn" onclick="makeReq()">Submit</button>
+
+
+    <div id="videos">
+    </div>
+
+
+
+    <script>
+    
+        
+
+        async function makeReq() {
+            
+            var video = document.getElementById("youtube").value
+
+            let response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${video}&type=video&key=AIzaSyB7uhW1IBOHvqtWj5WPTN9f3zt24Nw3kmo&maxResults=20`)
+
+            let data = await response.json();
+
+            console.log("datausingInput:", data)
+
+            var divs = document.getElementById("videos")
+
+            divs.innerHTML = ""
+
+            for(let {id} of data.items){
+                var iframe = document.createElement("iframe")
+                iframe.src= `http://www.youtube.com/embed/${id.videoId}`
+                iframe.allow= "fullscreen";
+                divs.appendChild(iframe)
+            }
+
+            
+        }
+
+        // makeReq();
+
+    </script>
+</body>
+
+</html>
