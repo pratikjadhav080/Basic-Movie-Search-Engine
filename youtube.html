@@ -5,52 +5,564 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <link rel="shortcut icon" href="https://www.youtube.com/s/desktop/4eebcda0/img/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title id="title">Youtube</title>
+
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Roboto, Arial, sans-serif;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #videos>div {
+            display: flex;
+        }
+
+        #nav {
+            background-color: #212121;
+            width: 100%;
+            display: flex;
+            padding: 13px;
+            position: fixed;
+            z-index: 1;
+        }
+
+        #btn {
+            width: 1.5%;
+            height: 20px;
+            padding-left: 15px;
+            padding-right: 35px;
+            margin-top: 5px;
+        }
+
+
+
+        #btn>button {
+            width: 100%;
+            background-color: #212121;
+            border: none;
+        }
+
+        #btn>button>hr {
+            border-top: 1px solid white;
+            margin-bottom: 5px;
+            border-bottom: none;
+        }
+
+        #btn hr:nth-child(3) {
+            margin-bottom: 0px;
+        }
+
+        #ulogo {
+            width: 7%;
+            margin-top: 5px;
+        }
+
+        #ulogo img {
+            width: 100%;
+        }
+
+        #country-code {
+            font-size: 10px;
+            font-family: Roboto, Arial, sans-serif;
+            margin-right: 10.5%;
+        }
+
+        #search {
+            display: flex;
+        }
+
+        #search {
+            width: 47%;
+        }
+
+        #search input {
+            width: 100%;
+            height: 35px;
+            background-color: black;
+            border: 1px solid rgb(41, 40, 40);
+            font-size: 15px;
+            padding: 0px 17px;
+            border-radius: 2px;
+            color: rgb(223, 213, 213);
+        }
+
+        #search input:focus {
+            outline: 1px solid blue;
+        }
+
+        #search button {
+            width: 12%;
+            height: 35px;
+            background: rgb(41, 40, 40);
+            color: #adadad;
+            border-left: none;
+            cursor: pointer;
+            border: none;
+            margin-left: 10px;
+        }
+
+        #search button:hover {
+            color: white;
+        }
+
+        #voice-search>button {
+            background-color: rgb(22, 22, 22);
+            border: none;
+            padding: 5px 8px;
+            border-radius: 25px;
+            margin-left: 12px;
+            margin-right: 170px;
+        }
+
+        .same {
+            background-color: #212121;
+            color: white;
+            border: none;
+            margin-right: 30px;
+        }
+
+        #Main_content {
+            display: flex;
+        }
+
+        #Main_content>div:nth-child(1) {
+            width: 6%;
+            background-color: #212121;
+            height: 1000px;
+            top: 63px;
+            position: fixed;
+            text-align: center;
+        }
+
+        #Main_content>div:nth-child(2) {
+            display: block;
+            width: 89%;
+            position: absolute;
+            background-color: #131212;
+            top: 6px;
+            left: 81px;
+            padding-left: 90px;
+            padding-top: 70px;
+        }
+
+        #Main_content p {
+            font-size: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        #Main_content>div>div {
+            padding: 20px 0px;
+            width: 100%;
+        }
+
+
+        #inside_content>div:hover {
+            background-color: #504e4e;
+        }
+
+        #Main_content>div>div>i {
+            margin-bottom: 10px;
+        }
+
+        #video_div iframe {
+            width: 32%;
+            height: 210px;
+            border: none;
+            margin-right: 18px;
+        }
+
+        #content_div {
+            width: 62%;
+            font-family: Arial, sans-serif;
+        }
+
+        #content_div h2 {
+            font-weight: 500;
+            font-size: 19px;
+            line-height: 1.4;
+        }
+
+        #content_div p {
+            color: rgb(157 153 153);
+            font-size: 13px;
+        }
+
+        #channel_div {
+            display: flex;
+            margin: 20px 0px;
+        }
+
+        #channel_div img {
+            width: 5%;
+            margin-right: 12px;
+        }
+
+        #channel_div p {
+            margin-top: 5px;
+        }
+
+        #content_home_div {
+            display: flex;
+        }
+
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            width: 92.5%;
+            position: absolute;
+            background-color: #131212;
+            top: 6px;
+            left: 81px;
+            padding-left: 20px;
+            padding-top: 70px;
+            font-family: Arial, sans-serif;
+        }
+
+        .grid-item {
+            margin: 10px;
+            margin-top: 30px;
+        }
+
+
+        #content_home_div>div:nth-child(1) {
+            width: 20%;
+        }
+
+        #content_home_div>div:nth-child(2) {
+            width: 80%;
+        }
+
+        #content_home_div img {
+            width: 100%;
+        }
+
+        .grid-item iframe {
+            width: 100%;
+            height: 160px;
+            margin-bottom: 10px;
+            border: none;
+        }
+
+        .grid-item h2 {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+
+        .grid-item p {
+            font-size: 15px;
+            color: rgb(157 153 153);
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 
 <body>
 
 
-    <input id='youtube' type="text">
-    <button id="btn" onclick="makeReq()">Submit</button>
-
-
-    <div id="videos">
+    <div id="nav">
+        <div id="btn">
+            <button>
+                <hr>
+                <hr>
+                <hr>
+            </button>
+        </div>
+        <div id="ulogo">
+            <img src="u.png" alt="youtube">
+        </div>
+        <span id="country-code" class="style-scope ytd-topbar-logo-renderer">IN</span>
+        <div id="search">
+            <input type="text" id="sear" name="search" placeholder="Search">
+            <button onclick="makeReq()" type="submit"><i style="font-size:30px;font-weight: 100;"
+                    class="material-icons">search</i></button>
+        </div>
+        <div id="voice-search">
+            <button>
+                <i class="material-icons" style="font-size:20px;color:white">mic</i>
+            </button>
+        </div>
+        <div>
+            <button class="same">
+                <i class="material-icons" style="font-size:30px">video_call</i>
+            </button>
+        </div>
+        <div>
+            <button class="same">
+                <i class="material-icons" style="font-size:30px">apps</i>
+            </button>
+        </div>
+        <div>
+            <button class="same">
+                <i class="material-icons" style="font-size:30px">notifications_none</i>
+            </button>
+        </div>
     </div>
 
+    <div id="Main_content">
+        <div id="inside_content">
+            <div onclick="mostPop()">
+                <i class="material-icons" style="font-size:30px">home</i>
+                <p>Home</p>
+            </div>
+            <div>
+                <i class="material-icons" style="font-size:30px">explore</i>
+                <p>Explore</p>
+            </div>
+            <div>
+                <i class="material-icons" style="font-size:30px">subscriptions</i>
+                <p>Subscriptions</p>
+            </div>
+            <div>
+                <i class="material-icons" style="font-size:30px">video_library</i>
+                <p>Library</p>
+            </div>
+        </div>
+        <div id="videos">
+        </div>
+    </div>
 
+    <div class="grid-container">
+    </div>
 
     <script>
-    
-        
+
+
+        function date_Calculate(a) {
+
+            let d = new Date();
+
+            let diff;
+
+            let published_year = a.slice(0, 4)
+
+            let published_month = a.slice(5, 7)
+
+            let published_date = a.slice(8, 10)
+
+
+            if (d.getFullYear() != Number(published_year)) {
+
+                diff = d.getFullYear() - Number(published_year)
+
+                if (diff > 1) {
+                    diff = diff + " years ago"
+                } else {
+                    diff = diff + " year ago"
+                }
+
+
+            } else if ((d.getMonth() + 1) != Number(published_month)) {
+
+                diff = (d.getMonth() + 1) - Number(published_month)
+
+                if (diff > 1) {
+                    diff = diff + " months ago"
+                } else {
+                    diff = diff + " month ago"
+                }
+
+            } else if (d.getDate() != Number(published_date)) {
+
+                diff = d.getDate() - Number(published_date)
+
+                if (diff > 1) {
+                    diff = diff + " days ago"
+                } else {
+                    diff = "Yesterday"
+                }
+            } else {
+                diff = "Today"
+            }
+
+            return diff
+        }
+
+
+        function views_Calculate(a) {
+
+            let b = Number(a)
+
+            if (b < 1000) {
+                return `${a} views`
+            } else if (b >= 1000 && b < 100000) {
+                return `${a.slice(0, a.length - 3)} thousand views`
+            } else if (b >= 100000 && b < 10000000) {
+                return `${a.slice(0, a.length - 5)} lakh views`
+            } else {
+                return `${a.slice(0, a.length - 7)} crore views`
+            }
+        }
+
+
 
         async function makeReq() {
-            
-            var video = document.getElementById("youtube").value
 
-            let response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${video}&type=video&key=AIzaSyB7uhW1IBOHvqtWj5WPTN9f3zt24Nw3kmo&maxResults=20`)
+
+            let video = document.getElementById("sear").value
+
+            document.getElementById("title").textContent = `${video} - Youtube`
+
+            let response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?&maxResults=25&part=snippet&q=${video}&key=AIzaSyCmuTsKYLleCQb2xTJCcVihwjwRRN92u7Q`)
 
             let data = await response.json();
 
-            console.log("datausingInput:", data)
+            let divs = document.getElementById("videos")
 
-            var divs = document.getElementById("videos")
+            let home_divs = document.querySelector(".grid-container")
+
+            if (divs.style.display == "none") {
+                divs.style.display = "block"
+            }
+
+            home_divs.style.display = "none"
 
             divs.innerHTML = ""
 
-            for(let {id} of data.items){
-                var iframe = document.createElement("iframe")
-                iframe.src= `http://www.youtube.com/embed/${id.videoId}`
-                iframe.allow= "fullscreen";
-                divs.appendChild(iframe)
+            for (let { id, snippet } of data.items) {
+
+                let video_div = document.createElement("div")
+                video_div.setAttribute("id", "video_div")
+
+                let content_div = document.createElement("div")
+                content_div.setAttribute("id", "content_div")
+
+                let iframe = document.createElement("iframe")
+                iframe.src = `http://www.youtube.com/embed/${id.videoId}`
+                iframe.allow = "fullscreen";
+
+
+                let title = document.createElement("h2")
+                title.textContent = snippet.title
+
+
+
+                let date = document.createElement("p")
+                date.textContent = date_Calculate(snippet.publishedAt)
+
+                let channel_div = document.createElement("div")
+                channel_div.setAttribute("id", "channel_div")
+
+                let channel_image = document.createElement("img")
+                channel_image.src = "netflix-logo.png"
+
+                let channel_title = document.createElement("p")
+                channel_title.textContent = snippet.channelTitle
+
+                channel_div.append(channel_image, channel_title)
+
+                let description = document.createElement("p")
+                description.textContent = snippet.description
+
+                content_div.append(title, date, channel_div, description)
+
+                video_div.append(iframe, content_div)
+
+                divs.append(video_div)
+
             }
 
-            
+
         }
 
-        // makeReq();
+
+        async function mostPop() {
+
+            let response = await fetch('https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&maxResults=25&key=AIzaSyCmuTsKYLleCQb2xTJCcVihwjwRRN92u7Q')
+
+            let data = await response.json();
+
+
+            let home_divs = document.querySelector(".grid-container")
+
+            let divs = document.getElementById("videos")
+
+            if (home_divs.style.display == "none") {
+                home_divs.style.display = "grid"
+            }
+
+
+            divs.style.display = "none"
+            home_divs.innerHTML = ""
+
+
+            for (let { id, snippet, statistics } of data.items) {
+
+                let iframe = document.createElement("iframe")
+                iframe.src = `http://www.youtube.com/embed/${id}`
+                iframe.allow = "fullscreen";
+
+                var entire_div = document.createElement("div")
+                entire_div.setAttribute("class", "grid-item")
+
+
+                var content_home_div = document.createElement("div")
+                content_home_div.setAttribute("id", "content_home_div")
+
+                var channel_img_div = document.createElement("div")
+                var details_div = document.createElement("div")
+
+                let channel_image = document.createElement("img")
+                channel_image.src = "netflix-logo.png"
+
+                channel_img_div.append(channel_image)
+
+                let title = document.createElement("h2")
+                title.textContent = snippet.title
+
+                let channel_title = document.createElement("p")
+                channel_title.textContent = snippet.channelTitle
+
+                let views_date = document.createElement("p")
+                views_date.textContent = `${views_Calculate(statistics.viewCount)} · ${date_Calculate(snippet.publishedAt)}`
+
+                details_div.append(title, channel_title, views_date)
+
+
+                content_home_div.append(channel_img_div, details_div)
+
+                entire_div.append(iframe, content_home_div)
+
+
+                home_divs.append(entire_div)
+            }
+        }
+
+        mostPop()
+
+
 
     </script>
 </body>
 
 </html>
+
+
+
+
+<!-- async function statistics() {
+    let res = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${id.videoId}&key=AIzaSyB7uhW1IBOHvqtWj5WPTN9f3zt24Nw3kmo`)
+
+    let stats = await res.json();
+
+    let views = document.createElement("p")
+    views.textContent = stats.items[0].statistics.viewCount
+
+    console.log("stats:", stats.items[0].statistics.viewCount)
+}
+
+statistics() -->
