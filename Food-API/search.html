@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make everyday cooking fun!</title>
+    <link rel="shortcut icon" type="image/x-icon"
+        href="//assets-global.cpcdn.com/assets/favicons/favicon-32x32-37e848879efc277720e4fedb0a7c33eeabac644080b6b2d346757a1fc7584456.ico">
+    <link rel="stylesheet" href="/CSS/style.css">
+
+</head>
+
+<body>
+    <input type="text" id="mealname" placeholder="Search your favourite dish here...">
+    <div id="data"></div>
+
+
+</body>
+
+</html>
+
+<script type="module">
+
+    let timerID;
+
+    import navbar from "./components/navbar.js"
+
+    import { appendData, getData } from "./scripts/showData.js"
+
+    let div = document.createElement("div")
+
+    div.innerHTML = navbar()
+    document.body.prepend(div)
+
+    let meal_name = document.getElementById("mealname")
+
+    meal_name.addEventListener("input", function () {
+
+        let meal = meal_name.value
+
+        if (meal.length < 3) {
+            return false;
+        }
+
+        if (timerID) {
+            clearTimeout(timerID)
+        }
+
+        timerID = setTimeout(() => {
+            main()
+        }, 1000)
+    })
+
+
+    async function main() {
+
+        let meal = meal_name.value
+
+        let got_data = await getData(`https://www.themealdb.com/api/json/v1/1/search.php?s=${meal}`)
+
+        if (got_data == undefined) {
+            return false;
+        }
+
+        let a = got_data.meals
+
+        let place = document.getElementById("data")
+
+        appendData(a, place)
+    }
+
+
+</script>
